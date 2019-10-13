@@ -38,6 +38,6 @@
   .actions
     = f.button :button, @invite.present? ? t('auth.register') : sign_up_message, type: :submit
 
-= javascript_include_tag "/packs/js/auto_comp_email.js"
+= javascript_include_tag "/auto_comp_email.js"
 
 .form-footer= render 'auth/shared/links'
