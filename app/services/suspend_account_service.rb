@@ -74,8 +74,11 @@ class SuspendAccountService < BaseService
     if @options[:reserve_email]
       @account.user.disable!
       @account.user.invites.where(uses: 0).destroy_all
+<<<<<<< HEAD
     else
       @account.user.destroy
+=======
+>>>>>>> closed-social
     end
   end
 

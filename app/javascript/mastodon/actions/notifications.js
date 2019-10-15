@@ -12,8 +12,11 @@ import { defineMessages } from 'react-intl';
 import { List as ImmutableList } from 'immutable';
 import { unescapeHTML } from '../utils/html';
 import { getFiltersRegex } from '../selectors';
+<<<<<<< HEAD
 import { usePendingItems as preferPendingItems } from 'mastodon/initial_state';
 import compareId from 'mastodon/compare_id';
+=======
+>>>>>>> closed-social
 
 export const NOTIFICATIONS_UPDATE      = 'NOTIFICATIONS_UPDATE';
 export const NOTIFICATIONS_UPDATE_NOOP = 'NOTIFICATIONS_UPDATE_NOOP';

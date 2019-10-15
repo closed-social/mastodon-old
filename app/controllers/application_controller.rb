@@ -139,6 +139,19 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.any  { head code }
       format.html { render "errors/#{code}", layout: 'error', status: code }
+<<<<<<< HEAD
+=======
+    end
+  end
+
+  def render_cached_json(cache_key, **options)
+    options[:expires_in] ||= 3.minutes
+    cache_public           = options.key?(:public) ? options.delete(:public) : true
+    content_type           = options.delete(:content_type) || 'application/json'
+
+    data = Rails.cache.fetch(cache_key, { raw: true }.merge(options)) do
+      yield.to_json
+>>>>>>> closed-social
     end
   end
 end

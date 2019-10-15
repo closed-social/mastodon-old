@@ -18,7 +18,11 @@ module Settings
       end
 
       def create
+<<<<<<< HEAD
         if current_user.validate_and_consume_otp!(confirmation_params[:otp_attempt])
+=======
+        if current_user.validate_and_consume_otp!(confirmation_params[:code])
+>>>>>>> closed-social
           flash.now[:notice] = I18n.t('two_factor_authentication.enabled_success')
 
           current_user.otp_required_for_login = true

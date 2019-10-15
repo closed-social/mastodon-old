@@ -680,6 +680,13 @@ en:
     directory: Profile directory
     explanation: Discover users based on their interests
     explore_mastodon: Explore %{title}
+<<<<<<< HEAD
+=======
+    how_to_enable: You are not currently opted-in to the directory. You can opt-in below. Use hashtags in your bio text to be listed under specific hashtags!
+    people:
+      one: "%{count} person"
+      other: "%{count} people"
+>>>>>>> closed-social
   domain_validator:
     invalid_domain: is not a valid domain name
   errors:

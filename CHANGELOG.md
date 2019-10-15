@@ -3,6 +3,7 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+<<<<<<< HEAD
 ## [3.0.1] - 2019-10-10
 ### Added
 
@@ -232,6 +233,8 @@ All notable changes to this project will be documented in this file.
 
 - Fix performance of GIF re-encoding and always strip EXIF data from videos ([Gargron](https://github.com/tootsuite/mastodon/pull/12057))
 
+=======
+>>>>>>> closed-social
 ## [2.9.3] - 2019-08-10
 ### Added
 

@@ -89,11 +89,16 @@ class ResolveAccountService < BaseService
       raise WebfingerRedirectError, "The URI #{uri} tries to hijack #{@username}@#{@domain}"
     end
 
+<<<<<<< HEAD
     @domain = nil if TagManager.instance.local_domain?(@domain)
   end
 
   def process_account!
     return unless activitypub_ready?
+=======
+    return if links_missing? || auto_suspend?
+    return Account.find_local(@username) if TagManager.instance.local_domain?(@domain)
+>>>>>>> closed-social
 
     RedisLock.acquire(lock_options) do |lock|
       if lock.acquired?

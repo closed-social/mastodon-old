@@ -37,7 +37,10 @@ class FeedManager
 
   def unpush_from_home(account, status)
     return false unless remove_from_feed(:home, account.id, status, account.user&.aggregates_reblogs?)
+<<<<<<< HEAD
 
+=======
+>>>>>>> closed-social
     redis.publish("timeline:#{account.id}", Oj.dump(event: :delete, payload: status.id.to_s))
     true
   end
@@ -58,7 +61,10 @@ class FeedManager
 
   def unpush_from_list(list, status)
     return false unless remove_from_feed(:list, list.id, status, list.account.user&.aggregates_reblogs?)
+<<<<<<< HEAD
 
+=======
+>>>>>>> closed-social
     redis.publish("timeline:list:#{list.id}", Oj.dump(event: :delete, payload: status.id.to_s))
     true
   end

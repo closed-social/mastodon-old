@@ -55,6 +55,17 @@ class ActivityPub::DeliveryWorker
          .run
   end
 
+<<<<<<< HEAD
+=======
+  def response_successful?(response)
+    (200...300).cover?(response.code)
+  end
+
+  def response_error_unsalvageable?(response)
+    response.code == 501 || ((400...500).cover?(response.code) && ![401, 408, 429].include?(response.code))
+  end
+
+>>>>>>> closed-social
   def failure_tracker
     @failure_tracker ||= DeliveryFailureTracker.new(@inbox_url)
   end

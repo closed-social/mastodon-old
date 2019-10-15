@@ -209,6 +209,7 @@ const expiresInFromExpiresAt = expires_at => {
   return [300, 1800, 3600, 21600, 86400, 259200, 604800].find(expires_in => expires_in >= delta) || 24 * 3600;
 };
 
+<<<<<<< HEAD
 const mergeLocalHashtagResults = (suggestions, prefix, tagHistory) => {
   prefix = prefix.toLowerCase();
   if (suggestions.length < 4) {
@@ -239,6 +240,8 @@ const updateSuggestionTags = (state, token) => {
   });
 };
 
+=======
+>>>>>>> closed-social
 export default function compose(state = initialState, action) {
   switch(action.type) {
   case STORE_HYDRATE:

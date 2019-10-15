@@ -8,9 +8,17 @@ class AboutController < ApplicationController
   before_action :set_instance_presenter
   before_action :set_expires_in, only: [:show, :more, :terms]
 
+<<<<<<< HEAD
   skip_before_action :require_functional!, only: [:more, :terms]
 
   def show; end
+=======
+  skip_before_action :check_user_permissions, only: [:more, :terms]
+
+  def show
+    @hide_navbar = true
+  end
+>>>>>>> closed-social
 
   def more
     flash.now[:notice] = I18n.t('about.instance_actor_flash') if params[:instance_actor]

@@ -15,10 +15,14 @@ module Settings
       def create
         @recovery_codes = current_user.generate_otp_backup_codes!
         current_user.save!
+<<<<<<< HEAD
 
         UserMailer.two_factor_recovery_codes_changed(current_user).deliver_later!
         flash.now[:notice] = I18n.t('two_factor_authentication.recovery_codes_regenerated')
 
+=======
+        flash.now[:notice] = I18n.t('two_factor_authentication.recovery_codes_regenerated')
+>>>>>>> closed-social
         render :index
       end
     end

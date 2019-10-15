@@ -13,7 +13,11 @@ module Mastodon
     end
 
     def patch
+<<<<<<< HEAD
       1
+=======
+      3
+>>>>>>> closed-social
     end
 
     def flags

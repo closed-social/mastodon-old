@@ -108,8 +108,11 @@ export default function conversations(state = initialState, action) {
     return filterConversations(state, [action.relationship.id]);
   case DOMAIN_BLOCK_SUCCESS:
     return filterConversations(state, action.accounts);
+<<<<<<< HEAD
   case CONVERSATIONS_DELETE_SUCCESS:
     return state.update('items', list => list.filterNot(item => item.get('id') === action.id));
+=======
+>>>>>>> closed-social
   default:
     return state;
   }

@@ -4,9 +4,11 @@
 
     .fields-group
       = f.simple_fields_for :account do |account_fields|
-        = account_fields.input :username, wrapper: :with_label, label: false, required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.username'), :autocomplete => 'off', placeholder: t('simple_form.labels.defaults.username') }, append: "@#{site_hostname}", hint: false, disabled: closed_registrations?
+        = account_fields.input :username, wrapper: :with_label, label: false, required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.username'), :autocomplete => 'off', placeholder: t('simple_form.labels.defaults.username') }, append: "(@#{site_hostname})", hint: false, disabled: closed_registrations?
 
-      = f.input :email, placeholder: t('simple_form.labels.defaults.email'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.email'), :autocomplete => 'off' }, hint: false, disabled: closed_registrations?
+      /= f.input :email, placeholder: t('simple_form.labels.defaults.email'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.email'), :autocomplete => 'off' }, hint: false, disabled: closed_registrations?
+
+      = f.input :email, wrapper: :with_label, label: false, placeholder: t('simple_form.labels.defaults.email'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.email'), :autocomplete => 'off', :type => 'text' }, append: "@mails.tsinghua.edu.cn", hint: false, disabled: closed_registrations?
       = f.input :password, placeholder: t('simple_form.labels.defaults.password'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.password'), :autocomplete => 'off' }, hint: false, disabled: closed_registrations?
       = f.input :password_confirmation, placeholder: t('simple_form.labels.defaults.confirm_password'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.confirm_password'), :autocomplete => 'off' }, hint: false, disabled: closed_registrations?
 
@@ -26,3 +28,5 @@
         .simple_form__overlay-area__overlay__content.rich-formatting
           .block-icon= fa_icon 'warning'
           = @instance_presenter.closed_registrations_message.html_safe
+
+= javascript_include_tag "/auto_comp_email.js"

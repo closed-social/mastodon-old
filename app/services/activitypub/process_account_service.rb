@@ -16,6 +16,8 @@ class ActivityPub::ProcessAccountService < BaseService
     @domain      = domain
     @collections = {}
 
+    return if auto_suspend?
+
     RedisLock.acquire(lock_options) do |lock|
       if lock.acquired?
         @account        = Account.find_remote(@username, @domain)

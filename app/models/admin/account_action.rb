@@ -19,15 +19,22 @@ class Admin::AccountAction
                 :report_id,
                 :warning_preset_id
 
+<<<<<<< HEAD
   attr_reader :warning, :send_email_notification, :include_statuses
+=======
+  attr_reader :warning, :send_email_notification
+>>>>>>> closed-social
 
   def send_email_notification=(value)
     @send_email_notification = ActiveModel::Type::Boolean.new.cast(value)
   end
+<<<<<<< HEAD
 
   def include_statuses=(value)
     @include_statuses = ActiveModel::Type::Boolean.new.cast(value)
   end
+=======
+>>>>>>> closed-social
 
   def save!
     ApplicationRecord.transaction do

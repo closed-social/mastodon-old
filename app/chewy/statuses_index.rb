@@ -51,7 +51,11 @@ class StatusesIndex < Chewy::Index
       field :id, type: 'long'
       field :account_id, type: 'long'
 
+<<<<<<< HEAD
       field :text, type: 'text', value: ->(status) { [status.spoiler_text, Formatter.instance.plaintext(status)].concat(status.media_attachments.map(&:description)).concat(status.preloadable_poll ? status.preloadable_poll.options : []).join("\n\n") } do
+=======
+      field :text, type: 'text', value: ->(status) { [status.spoiler_text, Formatter.instance.plaintext(status)].concat(status.media_attachments.map(&:description)).concat(status.preloadable_poll ? status_preloadable_poll.options : []).join("\n\n") } do
+>>>>>>> closed-social
         field :stemmed, type: 'text', analyzer: 'content'
       end
 

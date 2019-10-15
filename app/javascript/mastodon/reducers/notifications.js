@@ -90,8 +90,12 @@ const expandNormalizedNotifications = (state, notifications, next, isLoadingRece
 };
 
 const filterNotifications = (state, accountIds) => {
+<<<<<<< HEAD
   const helper = list => list.filterNot(item => item !== null && accountIds.includes(item.get('account')));
   return state.update('items', helper).update('pendingItems', helper);
+=======
+  return state.update('items', list => list.filterNot(item => item !== null && accountIds.includes(item.get('account'))));
+>>>>>>> closed-social
 };
 
 const updateTop = (state, top) => {

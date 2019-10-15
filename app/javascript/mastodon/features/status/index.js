@@ -69,6 +69,7 @@ const makeMapStateToProps = () => {
     let ancestorsIds = Immutable.List();
     ancestorsIds = ancestorsIds.withMutations(mutable => {
       let id = statusId;
+<<<<<<< HEAD
 
       while (id) {
         mutable.unshift(id);
@@ -111,6 +112,53 @@ const makeMapStateToProps = () => {
           insertAt += 1;
         }
       });
+=======
+
+      while (id) {
+        mutable.unshift(id);
+        id = inReplyTos.get(id);
+      }
+    });
+
+    return ancestorsIds;
+  });
+
+  const getDescendantsIds = createSelector([
+    (_, { id }) => id,
+    state => state.getIn(['contexts', 'replies']),
+  ], (statusId, contextReplies) => {
+    let descendantsIds = Immutable.List();
+    descendantsIds = descendantsIds.withMutations(mutable => {
+      const ids = [statusId];
+
+      while (ids.length > 0) {
+        let id        = ids.shift();
+        const replies = contextReplies.get(id);
+
+        if (statusId !== id) {
+          mutable.push(id);
+        }
+
+        if (replies) {
+          replies.reverse().forEach(reply => {
+            ids.unshift(reply);
+          });
+        }
+      }
+    });
+
+    return descendantsIds;
+  });
+
+  const mapStateToProps = (state, props) => {
+    const status = getStatus(state, { id: props.params.statusId });
+    let ancestorsIds = Immutable.List();
+    let descendantsIds = Immutable.List();
+
+    if (status) {
+      ancestorsIds = getAncestorsIds(state, { id: status.get('in_reply_to_id') });
+      descendantsIds = getDescendantsIds(state, { id: status.get('id') });
+>>>>>>> closed-social
     }
 
     return Immutable.List(descendantsIds);
