@@ -3261,12 +3261,7 @@ core-js-pure@^3.0.0:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.6.5.tgz#c79e75f5e38dbc85a662d91eea52b8256d53b813"
   integrity sha512-lacdXOimsiD0QyNf9BC/mxivNJ/ybBGJXQFKzRekp1WTHoVUWsUHEn+2T8GJAzzIhyOuXA+gOxCVN3l+5PLPUA==
 
-core-js@^2.4.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.1.tgz#87416ae817de957a3f249b3b5ca475d4aaed6042"
-  integrity sha512-L72mmmEayPJBejKIWe2pYtGis5r0tQ5NaJekdhyXgeMQTpJoBsH0NL4ElY2LfSoV15xeQWKQ+XTTOZdyero5Xg==
-
-core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
@@ -9077,10 +9072,10 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-tree-graph@^4.0.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/react-tree-graph/-/react-tree-graph-4.1.1.tgz#1b0abd49ab3dfabe08392e5539a60bb03f56005a"
-  integrity sha512-ATuRmH+1Bw2QV36EwYwek7VRB5+Xp4gp5DmXzX/JuvVUdgTgEq8lvFj7PPm8lQRjyy6ebS8rc8+lSD1Bx6QRWA==
+react-tree-graph@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-tree-graph/-/react-tree-graph-5.1.0.tgz#13b776e90e36b9bdf5261e7e735f88eaa8c8341a"
+  integrity sha512-tRSw03JfvXeUY7sGSCtj7s5EnK20yjsPsxSU/LKygxzMVUjD9fRU5aYUnFTMnijVOHvgSQBmUnVIEeCLEA7SkQ==
   dependencies:
     clone "^2.1.1"
     core-js "^2.5.0"

@@ -144,7 +144,7 @@
     "react-swipeable-views": "^0.13.9",
     "react-textarea-autosize": "^8.1.1",
     "react-toggle": "^4.1.1",
-    "react-tree-graph": "^4.0.1",
+    "react-tree-graph": "^5.1.0",
     "redis": "^3.0.2",
     "redux": "^4.0.5",
     "redux-immutable": "^4.0.0",
