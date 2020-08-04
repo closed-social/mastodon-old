@@ -2,24 +2,16 @@ import React from 'react';
 import Immutable from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import Avatar from './avatar';
-import AvatarOverlay from './avatar_overlay';
-import AvatarComposite from './avatar_composite';
 import RelativeTimestamp from './relative_timestamp';
 import DisplayName from './display_name';
 import StatusContent from './status_content';
-import StatusActionBar from './status_action_bar';
 import AttachmentList from './attachment_list';
 import Card from '../features/status/components/card';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { MediaGallery, Video, Audio } from '../features/ui/util/async-components';
-import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
-import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
-
-//import DetailedStatus from '../features/status/components/detailed_status';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -40,6 +32,17 @@ export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   }
 
   return values.join(', ');
+};
+
+export const textForAbstract = (status) => {
+  const displayName = status.getIn(['account', 'display_name']);
+
+  const values = [
+    displayName.length === 0 ? status.getIn(['account', 'acct']).split('@')[0] : displayName,
+    status.get('spoiler_text') && status.get('hidden') ? status.get('spoiler_text') : status.get('search_index').slice(status.get('spoiler_text').length),
+  ];
+
+  return values.join(': ');
 };
 
 export const defaultMediaVisibility = (status) => {
@@ -66,19 +69,6 @@ class Status extends ImmutablePureComponent {
     account: ImmutablePropTypes.map,
     otherAccounts: ImmutablePropTypes.list,
     onClick: PropTypes.func,
-    onReply: PropTypes.func,
-    onFavourite: PropTypes.func,
-    onReblog: PropTypes.func,
-    onDelete: PropTypes.func,
-    onDirect: PropTypes.func,
-    onMention: PropTypes.func,
-    onPin: PropTypes.func,
-    onOpenMedia: PropTypes.func,
-    onOpenVideo: PropTypes.func,
-    onBlock: PropTypes.func,
-    onEmbed: PropTypes.func,
-    onHeightChange: PropTypes.func,
-    onToggleHidden: PropTypes.func,
     muted: PropTypes.bool,
     hidden: PropTypes.bool,
     unread: PropTypes.bool,
@@ -175,22 +165,6 @@ class Status extends ImmutablePureComponent {
     this.context.router.history.push(`/statuses/${status.getIn(['reblog', 'id'], status.get('id'))}`);
   }
 
-  handleExpandClick = (e) => {
-    if (this.props.onClick) {
-      this.props.onClick();
-      return;
-    }
-
-    if (e.button === 0) {
-      if (!this.context.router) {
-        return;
-      }
-
-      const { status } = this.props;
-      this.context.router.history.push(`/statuses/${status.getIn(['reblog', 'id'], status.get('id'))}`);
-    }
-  }
-
   handleAccountClick = (e) => {
     if (this.context.router && e.button === 0 && !(e.ctrlKey || e.metaKey)) {
       const id = e.currentTarget.getAttribute('data-id');
@@ -219,48 +193,6 @@ class Status extends ImmutablePureComponent {
     this.props.onOpenVideo(media, startTime);
   }
 
-  handleHotkeyReply = e => {
-    e.preventDefault();
-    this.props.onReply(this._properStatus(), this.context.router.history);
-  }
-
-  handleHotkeyFavourite = () => {
-    this.props.onFavourite(this._properStatus());
-  }
-
-  handleHotkeyBoost = e => {
-    this.props.onReblog(this._properStatus(), e);
-  }
-
-  handleHotkeyMention = e => {
-    e.preventDefault();
-    this.props.onMention(this._properStatus().get('account'), this.context.router.history);
-  }
-
-  handleHotkeyOpen = () => {
-    this.context.router.history.push(`/statuses/${this._properStatus().get('id')}`);
-  }
-
-  handleHotkeyOpenProfile = () => {
-    this.context.router.history.push(`/accounts/${this._properStatus().getIn(['account', 'id'])}`);
-  }
-
-  handleHotkeyMoveUp = e => {
-    this.props.onMoveUp(this.props.status.get('id'), e.target.getAttribute('data-featured'));
-  }
-
-  handleHotkeyMoveDown = e => {
-    this.props.onMoveDown(this.props.status.get('id'), e.target.getAttribute('data-featured'));
-  }
-
-  handleHotkeyToggleHidden = () => {
-    this.props.onToggleHidden(this._properStatus());
-  }
-
-  handleHotkeyToggleSensitive = () => {
-    this.handleToggleMediaVisibility();
-  }
-
   _properStatus () {
     const { status } = this.props;
 
@@ -277,7 +209,7 @@ class Status extends ImmutablePureComponent {
 
   render () {
     let media = null;
-    let statusAvatar, prepend, rebloggedByText;
+    let rebloggedByText;
 
     const { intl, hidden, featured, otherAccounts, unread, showThread, sonsIds } = this.props;
 
@@ -287,67 +219,24 @@ class Status extends ImmutablePureComponent {
       return null;
     }
 
-    const handlers = this.props.muted ? {} : {
-      reply: this.handleHotkeyReply,
-      favourite: this.handleHotkeyFavourite,
-      boost: this.handleHotkeyBoost,
-      mention: this.handleHotkeyMention,
-      open: this.handleHotkeyOpen,
-      openProfile: this.handleHotkeyOpenProfile,
-      moveUp: this.handleHotkeyMoveUp,
-      moveDown: this.handleHotkeyMoveDown,
-      toggleHidden: this.handleHotkeyToggleHidden,
-      toggleSensitive: this.handleHotkeyToggleSensitive,
-    };
-
     if (hidden) {
       return (
-        <HotKeys handlers={handlers}>
-          <div ref={this.handleRef} className={classNames('status__wrapper', { focusable: !this.props.muted })} tabIndex='0'>
+        <div ref={this.handleRef} className={classNames('status__wrapper', { focusable: !this.props.muted })} tabIndex='0'>
             {status.getIn(['account', 'display_name']) || status.getIn(['account', 'username'])}
             {status.get('content')}
-          </div>
-        </HotKeys>
+        </div>
       );
     }
 
     if (status.get('filtered') || status.getIn(['reblog', 'filtered'])) {
-      const minHandlers = this.props.muted ? {} : {
-        moveUp: this.handleHotkeyMoveUp,
-        moveDown: this.handleHotkeyMoveDown,
-      };
-
+      
       return (
-        <HotKeys handlers={minHandlers}>
           <div className='status__wrapper status__wrapper--filtered focusable' tabIndex='0' ref={this.handleRef}>
             <FormattedMessage id='status.filtered' defaultMessage='Filtered' />
           </div>
-        </HotKeys>
       );
     }
 
-    if (featured) {
-      prepend = (
-        <div className='status__prepend'>
-          <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.pinned' defaultMessage='Pinned toot' />
-        </div>
-      );
-    } else if (status.get('reblog', null) !== null && typeof status.get('reblog') === 'object') {
-      const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
-
-      prepend = (
-        <div className='status__prepend'>
-          <div className='status__prepend-icon-wrapper'><Icon id='retweet' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.reblogged_by' defaultMessage='{name} boosted' values={{ name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
-        </div>
-      );
-
-      rebloggedByText = intl.formatMessage({ id: 'status.reblogged_by', defaultMessage: '{name} boosted' }, { name: status.getIn(['account', 'acct']) });
-
-      account = status.get('account');
-      status  = status.get('reblog');
-    }
 
     if (status.get('media_attachments').size > 0) {
       if (this.props.muted) {
@@ -426,47 +315,20 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    if (otherAccounts && otherAccounts.size > 0) {
-      statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
-    } else if (account === undefined || account === null) {
-      statusAvatar = <Avatar account={status.get('account')} size={48} />;
-    } else {
-      statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
-    }
-
     return (
-      <HotKeys handlers={handlers}>
         <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
-          {prepend}
 
           <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
-            <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
-            <div className='status__info'>
-              <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
-
-              <a onClick={this.handleAccountClick} target='_blank' data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name'>
-                <div className='status__avatar'>
-                  {statusAvatar}
-                </div>
-
-                <DisplayName account={status.get('account')} others={otherAccounts} />
-              </a>
+            <div className='status_abstract status__content status__content--with-action' onClick={this.handleClick}>
+              <p>
+                {textForAbstract(status)}
+              </p>
             </div>
 
-            <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} onExpandedToggle={this.handleExpandedToggle} collapsable />
-
             {media}
-
-            {showThread && status.get('in_reply_to_id') && status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) && (
-              <button className='status__content__read-more-button' onClick={this.handleClick}>
-                <FormattedMessage id='status.show_thread' defaultMessage='Show thread' />
-              </button>
-            )}
-
-            <StatusActionBar status={status} account={account} {...other} />
+          
           </div>
         </div>
-      </HotKeys>
     );
   }
 

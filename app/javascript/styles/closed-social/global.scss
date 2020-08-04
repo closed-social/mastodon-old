@@ -52,16 +52,9 @@ div {
   background: #dbdbdb40;
  
   .status {
-      padding-left:40px;
-
-      .status__action-bar {
-        display: none;
+      padding-left:20px;
+      min-height:10px;
       }
-      .status__avatar {
-	      transform: scale(0.5);
-	      transform-origin: 0% 0%;
-      }
-  }
 }
 
 .status__tree__quote__wrapper {

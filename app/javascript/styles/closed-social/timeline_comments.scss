@@ -1,5 +1,5 @@
 .comments-timeline {
-  max-height: 160px;
+  max-height: 80px;
   min-width: 60%;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(#1a1a1a,transparent);
@@ -10,17 +10,8 @@
   margin-right:8px;
   position: absolute;
   z-index:9;
-  &:hover {
-    max-height: 60vh;
-    overflow-y: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-    z-index:99;
-    background: $tc-background;
-    box-shadow: $primary-text-color 3.2px 3.2px 8px;
-  }
-  &:active {
-    max-height: 60vh;
+  &:hover, &:active {
+    max-height: 40vh;
     overflow-y: auto;
     -webkit-mask-image: none;
     mask-image: none;
@@ -29,10 +20,15 @@
     box-shadow: $primary-text-color 3.2px 3.2px 8px;
   }
   & .comments-timeline-2 {
-    margin-left:42px;
+    margin-left:20px;
+  }
+
+  .status {
+    padding-left: 15px;
+    min-height: 10px;
   }
 }
 
 .comments-timeline__wrapper {
-  height: 135px;
+  height: 66px;
 }
