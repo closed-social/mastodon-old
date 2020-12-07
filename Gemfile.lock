@@ -622,7 +622,7 @@ GEM
     thwait (0.2.0)
       e2mmap
     tilt (2.0.10)
-    tty-color (0.5.1)
+    tty-color (0.6.0)
     tty-cursor (0.7.1)
     tty-prompt (0.21.0)
       necromancer (~> 0.5.0)
