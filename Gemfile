@@ -141,7 +141,7 @@ group :development do
   gem 'letter_opener_web', '~> 1.4'
   gem 'memory_profiler'
   gem 'rubocop', '~> 0.91', require: false
-  gem 'rubocop-rails', '~> 2.8', require: false
+  gem 'rubocop-rails', '~> 2.9', require: false
   gem 'brakeman', '~> 4.9', require: false
   gem 'bundler-audit', '~> 0.7', require: false
 
