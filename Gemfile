@@ -70,7 +70,7 @@ gem 'nilsimsa', git: 'https://github.com/witgo/nilsimsa', ref: 'fd184883048b922b
 gem 'nokogiri', '~> 1.10'
 gem 'nsa', '~> 0.2'
 gem 'oj', '~> 3.10'
-gem 'ox', '~> 2.13'
+gem 'ox', '~> 2.14'
 gem 'parslet'
 gem 'parallel', '~> 1.19'
 gem 'posix-spawn'
