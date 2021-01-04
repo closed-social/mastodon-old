@@ -125,7 +125,7 @@ group :test do
   gem 'microformats', '~> 4.2'
   gem 'rails-controller-testing', '~> 1.0'
   gem 'rspec-sidekiq', '~> 3.1'
-  gem 'simplecov', '~> 0.19', require: false
+  gem 'simplecov', '~> 0.21', require: false
   gem 'webmock', '~> 3.9'
   gem 'parallel_tests', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4'
