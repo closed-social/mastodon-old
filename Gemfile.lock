@@ -604,7 +604,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.21.0)
+    sshkit (1.21.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stackprof (0.2.16)
