@@ -33,7 +33,7 @@ gem 'charlock_holmes', '~> 0.7.7'
 gem 'iso-639'
 gem 'chewy', '~> 5.1'
 gem 'cld3', '~> 3.4.1'
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.8'
 gem 'devise-two-factor', '~> 3.1'
 
 group :pam_authentication, optional: true do
