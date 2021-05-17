@@ -210,7 +210,7 @@ GEM
       tzinfo
     excon (0.76.0)
     fabrication (2.21.1)
-    faker (2.15.1)
+    faker (2.18.0)
       i18n (>= 1.6, < 2)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
@@ -272,7 +272,7 @@ GEM
     httplog (1.4.3)
       rack (>= 1.0)
       rainbow (>= 2.0.0)
-    i18n (1.8.5)
+    i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.33)
       activesupport (>= 4.0.2)
@@ -347,7 +347,9 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2020.0512)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.2)
@@ -717,7 +719,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.7)
   ed25519 (~> 1.2)
   fabrication (~> 2.21)
-  faker (~> 2.15)
+  faker (~> 2.18)
   fast_blank (~> 1.0)
   fastimage
   fog-core (<= 2.1.0)
