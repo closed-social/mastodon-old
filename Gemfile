@@ -58,7 +58,7 @@ gem 'health_check', git: 'https://github.com/ianheggie/health_check', ref: '0b79
 gem 'htmlentities', '~> 4.3'
 gem 'http', '~> 4.4'
 gem 'http_accept_language', '~> 2.1'
-gem 'httplog', '~> 1.4.3'
+gem 'httplog', '~> 1.5.0'
 gem 'idn-ruby', require: 'idn'
 gem 'kaminari', '~> 1.2'
 gem 'link_header', '~> 0.0'
