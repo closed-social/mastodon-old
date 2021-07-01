@@ -220,7 +220,7 @@ GEM
     faraday-net_http (1.0.1)
     fast_blank (1.0.0)
     fastimage (2.2.3)
-    ffi (1.15.0)
+    ffi (1.15.3)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -270,7 +270,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
-    http-parser (1.2.1)
+    http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
     http_accept_language (2.1.1)
     httplog (1.5.0)
