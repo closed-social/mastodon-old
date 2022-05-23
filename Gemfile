@@ -121,7 +121,7 @@ group :test do
   gem 'rspec-sidekiq', '~> 3.1'
   gem 'simplecov', '~> 0.21', require: false
   gem 'webmock', '~> 3.13'
-  gem 'parallel_tests', '~> 3.7'
+  gem 'parallel_tests', '~> 3.10'
   gem 'rspec_junit_formatter', '~> 0.4'
 end
 
