@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 ruby '>= 2.5.0', '< 3.1.0'
 
-gem 'pkg-config', '~> 1.4'
+gem 'pkg-config', '~> 1.5'
 
 gem 'puma', '~> 5.3'
 gem 'rails', '~> 6.1.3'
