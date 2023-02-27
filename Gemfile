@@ -14,7 +14,7 @@ gem 'rack', '~> 2.2.3'
 gem 'hamlit-rails', '~> 0.2'
 gem 'pg', '~> 1.2'
 gem 'makara', '~> 0.5'
-gem 'pghero', '~> 2.8'
+gem 'pghero', '~> 3.2'
 gem 'dotenv-rails', '~> 2.7'
 
 gem 'aws-sdk-s3', '~> 1.95', require: false
