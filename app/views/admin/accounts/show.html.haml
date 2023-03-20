@@ -102,8 +102,7 @@
 
           %tr
             %th{ rowspan: can?(:create, :email_domain_block) ? 3 : 2 }= t('admin.accounts.email')
-            %td{ rowspan: can?(:create, :email_domain_block) ? 3 : 2 }= @account.user_email
-            %td= table_link_to 'edit', t('admin.accounts.change_email.label'), admin_account_change_email_path(@account.id) if can?(:change_email, @account.user)
+            %td{ rowspan: can?(:create, :email_domain_block) ? 3 : 2 }= hide_email(@account.user_email)
 
           %tr
             %td= table_link_to 'search', t('admin.accounts.search_same_email_domain'), admin_accounts_path(email: "%@#{@account.user_email.split('@').last}")

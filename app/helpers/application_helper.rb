@@ -109,6 +109,11 @@ module ApplicationHelper
     policy(record).public_send("#{action}?")
   end
 
+ def hide_email(email)
+    p1, p2 = email.split('@')
+    "#{p1[0]}***#{p1[-1]}@#{p2}"
+  end
+
   def fa_icon(icon, attributes = {})
     class_names = attributes[:class]&.split(' ') || []
     class_names << 'fa'
