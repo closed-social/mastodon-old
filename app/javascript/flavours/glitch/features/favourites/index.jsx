@@ -74,7 +74,7 @@ class Favourites extends ImmutablePureComponent {
     return (
       <Column ref={this.setRef}>
         <ColumnHeader
-          icon='star'
+          icon='heart'
           title={intl.formatMessage(messages.heading)}
           onClick={this.handleHeaderClick}
           showBackButton
