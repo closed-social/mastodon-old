@@ -209,7 +209,7 @@ class Conversation extends ImmutablePureComponent {
             />
 
             <div className='status__action-bar'>
-              <IconButton className='status__action-bar-button' title={intl.formatMessage(messages.reply)} icon='reply' onClick={this.handleReply} />
+              <IconButton className='status__action-bar-button' title={intl.formatMessage(messages.reply)} icon='comment' onClick={this.handleReply} />
 
               <div className='status__action-bar-dropdown'>
                 <DropdownMenuContainer

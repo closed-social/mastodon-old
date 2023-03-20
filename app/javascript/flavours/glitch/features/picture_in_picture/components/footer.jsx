@@ -162,10 +162,10 @@ class Footer extends ImmutablePureComponent {
     let replyIcon, replyTitle;
 
     if (status.get('in_reply_to_id', null) === null) {
-      replyIcon = 'reply';
+      replyIcon = 'comment';
       replyTitle = intl.formatMessage(messages.reply);
     } else {
-      replyIcon = 'reply-all';
+      replyIcon = 'comments';
       replyTitle = intl.formatMessage(messages.replyAll);
     }
 
@@ -187,7 +187,7 @@ class Footer extends ImmutablePureComponent {
         <IconButton
           className='status__action-bar-button'
           title={replyTitle}
-          icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon}
+          icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'comment' : replyIcon}
           onClick={this.handleReplyClick}
           counter={status.get('replies_count')}
           obfuscateCount
@@ -198,7 +198,7 @@ class Footer extends ImmutablePureComponent {
         <IconButton
           className='status__action-bar-button'
           title={replyTitle}
-          icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon}
+          icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'comment' : replyIcon}
           onClick={this.handleReplyClick}
         />
       );

@@ -65,7 +65,7 @@ class FilterBar extends React.PureComponent {
           onClick={this.onClick('mention')}
           title={intl.formatMessage(tooltips.mentions)}
         >
-          <Icon id='reply-all' fixedWidth />
+          <Icon id='comments' fixedWidth />
         </button>
         <button
           className={selectedFilter === 'favourite' ? 'active' : ''}
