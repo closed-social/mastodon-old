@@ -21,7 +21,7 @@ module Mastodon
     end
 
     def suffix
-      '+glitch'
+      '+glitch+closedsocial'
     end
 
     def to_a
