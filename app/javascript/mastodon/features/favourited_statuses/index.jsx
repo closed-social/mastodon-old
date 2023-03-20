@@ -76,7 +76,7 @@ class Favourites extends ImmutablePureComponent {
     return (
       <Column bindToDocument={!multiColumn} ref={this.setRef} label={intl.formatMessage(messages.heading)}>
         <ColumnHeader
-          icon='star'
+          icon='heart'
           title={intl.formatMessage(messages.heading)}
           onPin={this.handlePin}
           onMove={this.handleMove}

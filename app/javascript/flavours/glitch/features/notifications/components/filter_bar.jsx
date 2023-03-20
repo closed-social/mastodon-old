@@ -72,7 +72,7 @@ class FilterBar extends React.PureComponent {
           onClick={this.onClick('favourite')}
           title={intl.formatMessage(tooltips.favourites)}
         >
-          <Icon id='star' fixedWidth />
+          <Icon id='heart' fixedWidth />
         </button>
         <button
           className={selectedFilter === 'reblog' ? 'active' : ''}

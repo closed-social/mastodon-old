@@ -107,7 +107,7 @@ class InteractionModal extends React.PureComponent {
       actionDescription = <FormattedMessage id='interaction_modal.description.reblog' defaultMessage='With an account on Mastodon, you can boost this post to share it with your own followers.' />;
       break;
     case 'favourite':
-      icon = <Icon id='star' />;
+      icon = <Icon id='heart' />;
       title = <FormattedMessage id='interaction_modal.title.favourite' defaultMessage="Favourite {name}'s post" values={{ name }} />;
       actionDescription = <FormattedMessage id='interaction_modal.description.favourite' defaultMessage='With an account on Mastodon, you can favourite this post to let the author know you appreciate it and save it for later.' />;
       break;

@@ -108,7 +108,7 @@ export default class StatusPrepend extends React.PureComponent {
 
     switch(type) {
     case 'favourite':
-      iconId = 'star';
+      iconId = 'heart';
       break;
     case 'featured':
       iconId = 'thumb-tack';

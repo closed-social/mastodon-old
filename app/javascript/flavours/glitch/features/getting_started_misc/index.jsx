@@ -54,7 +54,7 @@ class gettingStartedMisc extends ImmutablePureComponent {
 
         <div className='scrollable'>
           <ColumnSubheading text={intl.formatMessage(messages.subheading)} />
-          {signedIn && (<ColumnLink key='favourites' icon='star' text={intl.formatMessage(messages.favourites)} to='/favourites' />)}
+          {signedIn && (<ColumnLink key='favourites' icon='heart' text={intl.formatMessage(messages.favourites)} to='/favourites' />)}
           {signedIn && (<ColumnLink key='pinned' icon='thumb-tack' text={intl.formatMessage(messages.pins)} to='/pinned' />)}
           {signedIn && (<ColumnLink key='featured_users' icon='users' text={intl.formatMessage(messages.featured_users)} onClick={this.openFeaturedAccountsModal} />)}
           {signedIn && (<ColumnLink key='mutes' icon='volume-off' text={intl.formatMessage(messages.mutes)} to='/mutes' />)}

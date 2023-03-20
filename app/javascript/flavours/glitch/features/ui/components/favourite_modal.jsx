@@ -91,7 +91,7 @@ class FavouriteModal extends ImmutablePureComponent {
         </div>
 
         <div className='boost-modal__action-bar'>
-          <div><FormattedMessage id='favourite_modal.combo' defaultMessage='You can press {combo} to skip this next time' values={{ combo: <span>Shift + <Icon id='star' /></span> }} /></div>
+          <div><FormattedMessage id='favourite_modal.combo' defaultMessage='You can press {combo} to skip this next time' values={{ combo: <span>Shift + <Icon id='heart' /></span> }} /></div>
           <Button text={intl.formatMessage(messages.favourite)} onClick={this.handleFavourite} ref={this.setRef} />
         </div>
       </div>
