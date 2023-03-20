@@ -97,7 +97,7 @@ class InteractionModal extends React.PureComponent {
 
     switch(type) {
     case 'reply':
-      icon = <Icon id='reply' />;
+      icon = <Icon id='comment' />;
       title = <FormattedMessage id='interaction_modal.title.reply' defaultMessage="Reply to {name}'s post" values={{ name }} />;
       actionDescription = <FormattedMessage id='interaction_modal.description.reply' defaultMessage='With an account on Mastodon, you can respond to this post.' />;
       break;
