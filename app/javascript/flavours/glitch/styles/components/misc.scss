@@ -379,16 +379,16 @@ body > [data-popper-placement] {
   position: absolute;
 
   .fa.star-icon {
-    color: $gold-star;
+    color: $red-bookmark;
   }
 }
 
 .icon-button.star-icon.active {
-  color: $gold-star;
+  color: $red-bookmark;
 }
 
 .icon-button.bookmark-icon.active {
-  color: $red-bookmark;
+  color: $gold-star;
 }
 
 .no-reduce-motion .icon-button.star-icon {
