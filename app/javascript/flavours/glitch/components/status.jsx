@@ -23,6 +23,9 @@ import PictureInPicturePlaceholder from 'flavours/glitch/components/picture_in_p
 // to use the progress bar to show download progress
 import Bundle from '../features/ui/components/bundle';
 
+import StatusContainer from 'mastodon/containers/status_container';
+
+
 export const textForScreenReader = (intl, status, rebloggedByText = false, expanded = false) => {
   const displayName = status.getIn(['account', 'display_name']);
 
@@ -85,6 +88,7 @@ class Status extends ImmutablePureComponent {
     onToggleHidden: PropTypes.func,
     onTranslate: PropTypes.func,
     onInteractionModal: PropTypes.func,
+    onLoadContext: PropTypes.func,
     muted: PropTypes.bool,
     hidden: PropTypes.bool,
     unread: PropTypes.bool,
@@ -106,6 +110,7 @@ class Status extends ImmutablePureComponent {
       inUse: PropTypes.bool,
       available: PropTypes.bool,
     }),
+    childrenIds: ImmutablePropTypes.list,
   };
 
   state = {
@@ -132,6 +137,7 @@ class Status extends ImmutablePureComponent {
     'expanded',
     'unread',
     'pictureInPicture',
+    'childrenIds',
   ];
 
   updateOnStates = [
@@ -239,6 +245,8 @@ class Status extends ImmutablePureComponent {
       collapse,
       muted,
       prepend,
+      onLoadContext,
+      childrenIds,
     } = this.props;
 
     // Prevent a crash when node is undefined. Not completely sure why this
@@ -267,6 +275,8 @@ class Status extends ImmutablePureComponent {
       this.setCollapsed(true);
       // Hack to fix timeline jumps on second rendering when auto-collapsing
       this.setState({ autoCollapsed: true });
+    } else if (status.get('replies_count') > 0 && !childrenIds) {
+      onLoadContext(status);
     }
 
     // Hack to fix timeline jumps when a preview card is fetched
@@ -519,6 +529,7 @@ class Status extends ImmutablePureComponent {
       unread,
       featured,
       pictureInPicture,
+      childrenIds,
       ...other
     } = this.props;
     const { isCollapsed, forceFilter } = this.state;
@@ -819,10 +830,23 @@ class Status extends ImmutablePureComponent {
               {...other}
             />
           ) : null}
+
           {notification ? (
             <NotificationOverlayContainer
               notification={notification}
             />
+          ) : null}
+
+          {!isCollapsed && childrenIds ? (
+            <div className="status__comments">
+              {childrenIds.map(id => (
+                <StatusContainer
+                  key={'comment-' + id}
+                  id={id}
+                  contextType='thread'
+                />
+              ))}
+            </div>
           ) : null}
         </div>
       </HotKeys>

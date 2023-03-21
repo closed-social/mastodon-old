@@ -26,6 +26,7 @@ import {
   editStatus,
   translateStatus,
   undoStatusTranslation,
+  fetchContext,
 } from 'flavours/glitch/actions/statuses';
 import {
   initAddFilter,
@@ -80,6 +81,8 @@ const makeMapStateToProps = () => {
       prepend = 'reblogged_by';
     }
 
+    let childrenIds = props.contextType === 'thread' ? null : state.getIn(['contexts', 'replies', status.get('id')]);
+
     return {
       containerId: props.containerId || props.id,  //  Should match reblogStatus's id for reblogs
       status: status,
@@ -87,6 +90,7 @@ const makeMapStateToProps = () => {
       settings: state.get('local_settings'),
       prepend: prepend || props.prepend,
       pictureInPicture: getPictureInPicture(state, props),
+      childrenIds: childrenIds,
     };
   };
 
@@ -270,6 +274,14 @@ const mapDispatchToProps = (dispatch, { intl, contextType }) => ({
       accountId: status.getIn(['account', 'id']),
       url: status.get('url'),
     }));
+  },
+
+  onLoadContext (status) {
+    if (contextType === 'thread') {
+      return;
+    }
+
+    dispatch(fetchContext(status.get('id')));
   },
 
 });
