@@ -23,8 +23,7 @@ import PictureInPicturePlaceholder from 'flavours/glitch/components/picture_in_p
 // to use the progress bar to show download progress
 import Bundle from '../features/ui/components/bundle';
 
-//import StatusContainer from 'mastodon/containers/status_container';
-import StatusContainer from 'flavours/glitch/containers/status_container_for_comment';
+import StatusContainer from 'mastodon/containers/status_container';
 
 
 export const textForScreenReader = (intl, status, rebloggedByText = false, expanded = false) => {

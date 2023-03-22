@@ -1117,7 +1117,7 @@ a.status-card.compact:hover {
   margin-left: 30px;
   border-left: 1px solid lighten($ui-base-color, 8%);
 
-  .status__avatar, .status__relative-time {
+  .status__avatar, .status__relative-time, .status__info__icons {
     display: none;
   }
 
