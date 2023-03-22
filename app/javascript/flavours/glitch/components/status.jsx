@@ -276,8 +276,8 @@ class Status extends ImmutablePureComponent {
       this.setCollapsed(true);
       // Hack to fix timeline jumps on second rendering when auto-collapsing
       this.setState({ autoCollapsed: true });
-    } else if (status.get('replies_count') > 0 && !childrenIds) {
-      onLoadContext(status);
+    } else {
+      this.checkAndLoadContext();
     }
 
     // Hack to fix timeline jumps when a preview card is fetched
@@ -320,6 +320,23 @@ class Status extends ImmutablePureComponent {
     }
   }
 
+
+  checkAndLoadContext() {
+    let {
+      status,
+      contextType,
+      childrenIds,
+      onLoadContext,
+    } = this.props;
+    if (contextType === 'thread') {
+      return;
+    }
+
+    if (status.get('replies_count') > 0 && !childrenIds) {
+      onLoadContext(status);
+    }
+  }
+
   //  `setCollapsed()` sets the value of `isCollapsed` in our state, that is,
   //  whether the toot is collapsed or not.
 
@@ -329,6 +346,9 @@ class Status extends ImmutablePureComponent {
     if (this.props.settings.getIn(['collapsed', 'enabled'])) {
       if (value) {
         this.setExpansion(false);
+      }
+      else {
+        this.checkAndLoadContext();
       }
       this.setState({ isCollapsed: value });
     } else {

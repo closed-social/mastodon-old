@@ -277,10 +277,6 @@ const mapDispatchToProps = (dispatch, { intl, contextType }) => ({
   },
 
   onLoadContext (status) {
-    if (contextType === 'thread') {
-      return;
-    }
-
     dispatch(fetchContext(status.get('id')));
   },
 
