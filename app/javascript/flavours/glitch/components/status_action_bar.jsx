@@ -307,11 +307,27 @@ class StatusActionBar extends ImmutablePureComponent {
           title={replyTitle}
           icon={replyIcon}
           onClick={this.handleReplyClick}
-          counter={showReplyCount ? status.get('replies_count') : undefined}
-          obfuscateCount
+          counter={status.get('replies_count')}
+          obfuscateCount={showReplyCount}
         />
-        <IconButton className={classNames('status__action-bar-button', { reblogPrivate })} disabled={!publicStatus && !reblogPrivate} active={status.get('reblogged')} title={reblogTitle} icon={reblogIcon} onClick={this.handleReblogClick} counter={withCounters ? status.get('reblogs_count') : undefined} />
-        <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='heart' onClick={this.handleFavouriteClick} counter={withCounters ? status.get('favourites_count') : undefined} />
+        <IconButton
+          className={classNames('status__action-bar-button', { reblogPrivate })}
+          disabled={!publicStatus && !reblogPrivate}
+          active={status.get('reblogged')}
+          title={reblogTitle}
+          icon={reblogIcon}
+          onClick={this.handleReblogClick}
+          counter={status.get('reblogs_count')}
+          obfuscateCount={showReplyCount}
+        />
+        <IconButton
+          className='status__action-bar-button star-icon'
+          animate active={status.get('favourited')}
+          title={intl.formatMessage(messages.favourite)}
+          icon='heart' onClick={this.handleFavouriteClick}
+          counter={status.get('favourites_count')}
+          obfuscateCount={showReplyCount}
+        />
         {shareButton}
         <IconButton className='status__action-bar-button bookmark-icon' disabled={anonymousAccess} active={status.get('bookmarked')} title={intl.formatMessage(messages.bookmark)} icon='bookmark' onClick={this.handleBookmarkClick} />
 
