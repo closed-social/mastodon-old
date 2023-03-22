@@ -1112,3 +1112,36 @@ a.status-card.compact:hover {
     border-color: lighten($ui-base-color, 12%);
   }
 }
+
+.status__comments {
+  margin-left: 30px;
+  border-left: 1px solid lighten($ui-base-color, 8%);
+
+  .status__avatar {
+    display: none;
+  }
+
+  .display-name strong {
+    display: inline-block;
+  }
+
+  .load-more {
+    border-bottom: 1px solid lighten($ui-base-color, 8%);
+  }
+}
+
+.status__quoted-status {
+  border-left: 4px solid #eee;
+  border-top: 2px solid #eee;
+  max-height: 200px;
+  overflow: hidden;
+  background: #eee2;
+  -webkit-mask-image: linear-gradient(#0002, #000d);
+  mask-image: linear-gradient(#0002, #000d);
+  transform: scale(.9);
+  transform-origin: bottom;
+
+  .status__info, .status__action-bar {
+    display: none;
+  }
+}

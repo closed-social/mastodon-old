@@ -1,5 +1,6 @@
 import { importFetchedStatus, importFetchedStatuses } from './importer';
 import { submitMarkers } from './markers';
+import { fetchContext } from './statuses';
 import api, { getLinks } from 'flavours/glitch/api';
 import { Map as ImmutableMap, List as ImmutableList } from 'immutable';
 import compareId from 'flavours/glitch/compare_id';
@@ -124,6 +125,17 @@ export function expandTimeline(timelineId, path, params = {}, done = noOp) {
 
       dispatch(importFetchedStatuses(response.data));
       dispatch(expandTimelineSuccess(timelineId, response.data, next ? next.uri : null, response.status === 206, isLoadingRecent, isLoadingMore, isLoadingRecent && preferPendingItems));
+
+      response.data.forEach((status) => {
+        // FIXME: better cache
+        if (!('REPLIES_COUNT' in window)) {
+          window.REPLIES_COUNT = {};
+        }
+        if (status.replies_count > 0 && status.replies_count !== window.REPLIES_COUNT[status.id]) {
+          dispatch(fetchContext(status.id));
+          window.REPLIES_COUNT[status.id] = status.replies_count;
+        }
+      });
 
       if (timelineId === 'home') {
         dispatch(submitMarkers());
