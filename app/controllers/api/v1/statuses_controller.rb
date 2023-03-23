@@ -50,10 +50,27 @@ class Api::V1::StatusesController < Api::BaseController
     render json: @context, serializer: REST::ContextSerializer, relationships: StatusRelationshipsPresenter.new(statuses, current_user&.account_id)
   end
 
+  def generate_anon_name(input, namelist, note)
+    name = namelist[Digest::SHA2.hexdigest(input).to_i(16) % namelist.size]
+    name.in?(note) ? nil : name
+  end
+
   def create
+    ori_text = status_params[:status]
+    anon = Rails.configuration.x.anon
+    anon_name = anon.acc &&
+                ori_text.strip.end_with?(anon.tag, "#{anon.tag} 👁️") &&
+                generate_anon_name(
+                  current_user.account.username + anon.salt + 5.hours.ago.strftime('%D'),
+                  anon.namelist,
+                  Account.find(anon.acc).note
+                )
+    sender = anon_name ? Account.find(anon.acc) : current_user.account
+    st_text = anon_name ? "[#{anon_name}]:\n#{ori_text}" : ori_text
+
     @status = PostStatusService.new.call(
-      current_user.account,
-      text: status_params[:status],
+      sender,
+      text: st_text,
       thread: @thread,
       media_ids: status_params[:media_ids],
       sensitive: status_params[:sensitive],
