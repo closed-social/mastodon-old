@@ -20,7 +20,7 @@ const initialState = ImmutableMap({
   preselect_on_reply: true,
   inline_preview_cards: true,
   hicolor_privacy_icons: false,
-  show_content_type_choice: false,
+  show_content_type_choice: true,
   tag_misleading_links: true,
   rewrite_mentions: 'no',
   content_warnings : ImmutableMap({
@@ -47,7 +47,7 @@ const initialState = ImmutableMap({
   }),
   media     : ImmutableMap({
     letterbox        : true,
-    fullwidth        : true,
+    fullwidth        : false,
     reveal_behind_cw : false,
     pop_in_player    : true,
     pop_in_position  : 'right',
@@ -57,10 +57,10 @@ const initialState = ImmutableMap({
     tab_badge     : true,
   }),
   status_icons : ImmutableMap({
-    language:   true,
+    language:   false,
     reply:      true,
     local_only: true,
-    media:      true,
+    media:      false,
     visibility: true,
   }),
 });

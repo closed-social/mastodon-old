@@ -72,6 +72,6 @@ export function deleteLocalSetting(key) {
 export function saveLocalSettings() {
   return (_, getState) => {
     const localSettings = getState().get('local_settings').toJS();
-    localStorage.setItem('mastodon-settings', JSON.stringify(localSettings));
+    localStorage.setItem('mastodon-settings:v2', JSON.stringify(localSettings));
   };
 }
