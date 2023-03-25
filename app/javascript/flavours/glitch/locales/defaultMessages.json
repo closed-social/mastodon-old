@@ -156,7 +156,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Glitch-soc is free open source software forked from Mastodon.",
+        "defaultMessage": "Closed-social is free open source software forked from Mastodon.",
         "id": "about.fork_disclaimer"
       }
     ],
