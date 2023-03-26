@@ -9,11 +9,15 @@ const mapStateToProps = (state, { id }) => {
   let reblogId = status.get('reblog'); // reblog here is a id
 
   return {
-    childrenIds: state.getIn(['contexts', 'replies', reblogId || id]),
+    childrenWithGrandchildren: state.getIn(['contexts', 'replies', reblogId || id], []).map((cid) => ({
+      cid,
+      grandchildrenIds: state.getIn(['contexts', 'replies', cid], []),
+    })),
     quotedId: reblogId && state.getIn(['statuses', reblogId, 'in_reply_to_id']),
   };
 };
 
+const N = 3;
 
 export default @connect(mapStateToProps)
 class StatusWithComments extends ImmutablePureComponent {
@@ -25,9 +29,14 @@ class StatusWithComments extends ImmutablePureComponent {
   show = () => this.setState({ showAll: true });
 
   render() {
-    const { id, childrenIds, quotedId, ...other } = this.props;
+    const { id, childrenWithGrandchildren, quotedId, ...other } = this.props;
     const { showAll } = this.state;
-    let hideSome = !showAll && !!childrenIds && childrenIds.size > 3;
+    const loadMore = (
+      <LoadMore
+        visible
+        onClick={this.show}
+      />
+    );
     return (
       <div className='status-with-comments'>
         {quotedId ? (
@@ -41,25 +50,34 @@ class StatusWithComments extends ImmutablePureComponent {
           id={id}
           {...other}
         />
-        {childrenIds ? (
+        {childrenWithGrandchildren.size > 0 && (
           <div className='status__comments'>
-            {childrenIds
-              .filter((_, idx) => showAll || idx < 3)
-              .map(cid => (
-                <StatusContainer
-                  key={`comment-${cid}`}
-                  id={cid}
-                  collapse={hideSome}
-                />
+            {childrenWithGrandchildren
+              .filter((_, idx) => showAll || idx < N)
+              .map(({ cid,  grandchildrenIds }) => (
+                <>
+                  <StatusContainer
+                    key={`comment-${cid}`}
+                    id={cid}
+                  />
+                  {grandchildrenIds.size > 0 && (
+                    <div className='subcomments'>
+                      {grandchildrenIds
+                        .filter((_, idx) => showAll || idx < N)
+                        .map((gid) => (
+                          <StatusContainer
+                            key={`subcomment-${gid}`}
+                            id={gid}
+                          />
+                        ))}
+                      {!showAll && grandchildrenIds.size > N && loadMore}
+                    </div>
+                  )}
+                </>
               ))}
-            {hideSome ? (
-              <LoadMore
-                visible={hideSome}
-                onClick={this.show}
-              />
-            ) : null}
+            {!showAll && childrenWithGrandchildren.size > N && loadMore}
           </div>
-        ) : null}
+        ) }
       </div>
     );
   }

@@ -1113,9 +1113,28 @@ a.status-card.compact:hover {
   }
 }
 
+.status-with-comments {
+  border-top: 1px solid #707f88;
+}
+
 .status__comments {
-  margin-left: 30px;
+  margin-left: 25px;
+  margin-bottom: 15px;
   border-left: 1px solid lighten($ui-base-color, 8%);
+  border-bottom: 1px solid lighten($ui-base-color, 8%);
+
+  .subcomments {
+    margin-left: 30px;
+  }
+
+  .load-more {
+    border-top: 1px solid lighten($ui-base-color, 8%);
+  }
+
+  .status__content {
+    font-size: 14px;
+    margin: 5px 0;
+  }
 
   .status__avatar {
     display: none;
